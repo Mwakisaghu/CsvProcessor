@@ -1,6 +1,11 @@
 package org.example;
 
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class ProcessCsvData {
     public static void main(String[] args) {
@@ -21,7 +26,11 @@ public class ProcessCsvData {
     private static void saveExcelFile(Workbook workbook, String excelFilePath) {
     }
 
-    private static Workbook processCSV(String csvFilePath) {
-        return null;
+    private static Workbook processCSV(String csvFilePath) throws IOException {
+        // opening & reading csv file into a workbook obj
+        FileInputStream fileInputStream = new FileInputStream(new File(csvFilePath));
+        Workbook workbook = new XSSFWorkbook(fileInputStream);
+        Sheet sheet = workbook.getSheetAt(0);
+        return workbook;
     }
 }
