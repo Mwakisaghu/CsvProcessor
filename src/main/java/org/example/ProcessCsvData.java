@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class ProcessCsvData {
+
     public static void main(String[] args) {
         try {
             // Reading the CSV File
@@ -29,7 +30,18 @@ public class ProcessCsvData {
         FileInputStream fileInputStream = new FileInputStream(csvFilePath);
         Workbook workbook = new XSSFWorkbook(fileInputStream);
         Sheet sheet = workbook.getSheetAt(0);
+
+        // creating Sheets for each gender
+        Workbook outputWorkbook = new XSSFWorkbook();
+        for (Gender gender : Gender.values()) {
+            Sheet outputSheet = outputWorkbook.createSheet(gender.toString());
+            processSheet(sheet, outputSheet, gender);
+        }
+
         return workbook;
+    }
+
+    private static void processSheet(Sheet sheet, Sheet outputSheet, Gender gender) {
     }
 
     private static void saveExcelFile(Workbook workbook, String excelFilePath) {
@@ -39,5 +51,9 @@ public class ProcessCsvData {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static enum Gender {
+        Male, Female
     }
 }
