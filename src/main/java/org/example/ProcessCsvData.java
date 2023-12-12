@@ -38,7 +38,14 @@ public class ProcessCsvData {
             processSheet(sheet, outputSheet, gender);
         }
 
-        return workbook;
+        // creating a sheet for invalid data
+        Sheet invalidDataSheet = outputWorkbook.createSheet("Invalid Data");
+        processInvalidData(sheet, invalidDataSheet);
+
+        return outputWorkbook;
+    }
+
+    private static void processInvalidData(Sheet sheet, Sheet invalidDataSheet) {
     }
 
     private static void processSheet(Sheet sheet, Sheet outputSheet, Gender gender) {
